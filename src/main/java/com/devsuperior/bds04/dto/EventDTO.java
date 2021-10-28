@@ -2,6 +2,8 @@ package com.devsuperior.bds04.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.devsuperior.bds04.entities.Event;
 

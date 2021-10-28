@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.bds04.dto.EventDTO;
+import com.devsuperior.bds04.entities.City;
 import com.devsuperior.bds04.entities.Event;
 import com.devsuperior.bds04.repositories.EventRepository;
 import com.devsuperior.bds04.services.exceptions.DataBaseException;
@@ -41,6 +42,7 @@ public class EventService {
 	public EventDTO insert(EventDTO dto) {
 		Event entity = new Event();
 		entity.setName(dto.getName());
+		entity.setCity(new City(dto.getCityId(), null));
 		entity = repository.save(entity);
 		return new EventDTO(entity);
 	}
