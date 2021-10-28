@@ -20,7 +20,7 @@ public class Event {
 	private String name;
 	private LocalDate date;
 	private String url;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
