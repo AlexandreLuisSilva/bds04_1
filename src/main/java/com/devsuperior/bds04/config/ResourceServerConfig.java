@@ -11,7 +11,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
 
 @Configuration
 @EnableResourceServer
@@ -27,6 +26,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] OPERATOR_OR_ADMIN = { "/events/**, /cities/**" };
 	
+	private static final String[] OPERATOR_POST = { "/events/**" };
+
+	private static final String[] OPERATOR = { "/cities/**" };
+
 	private static final String[] ADMIN = { "/users/**" };
 	
 	@Override
@@ -45,7 +48,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
 		.antMatchers(HttpMethod.GET, OPERATOR_OR_ADMIN).permitAll()
-		.antMatchers(OPERATOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN")
+		.antMatchers(HttpMethod.GET, OPERATOR).permitAll()
+		.antMatchers(HttpMethod.POST, OPERATOR_POST).permitAll()
+		.antMatchers(OPERATOR_POST).hasRole("OPERATOR_OR_ADMIN")
+		.antMatchers(OPERATOR).hasRole("ADMIN")
 		.antMatchers(ADMIN).hasRole("ADMIN")
 		.anyRequest().authenticated();
 	}	
