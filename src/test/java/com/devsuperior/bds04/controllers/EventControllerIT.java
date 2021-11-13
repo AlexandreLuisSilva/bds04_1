@@ -177,7 +177,7 @@ public class EventControllerIT {
 
 	@Test
 	public void findAllShouldReturnPagedResources() throws Exception {
-		
+		 
 		ResultActions result =
 				mockMvc.perform(get("/events")
 					.contentType(MediaType.APPLICATION_JSON));

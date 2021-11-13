@@ -1,6 +1,9 @@
 package com.devsuperior.bds04.resources;
 
 import java.net.URI;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,9 +30,8 @@ public class CityResource {
 	private CityService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<CityDTO>> findAll (Pageable pageable) {
-		Page<CityDTO> list = service.findAllPaged(pageable);
-		
+	public ResponseEntity<List<CityDTO>> findAll () {
+		List<CityDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
@@ -40,7 +42,7 @@ public class CityResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<CityDTO> insert(@RequestBody CityDTO dto) {
+	public ResponseEntity<CityDTO> insert(@Valid @RequestBody CityDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
@@ -48,7 +50,7 @@ public class CityResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CityDTO> update(@PathVariable Long id, @RequestBody CityDTO dto) {
+	public ResponseEntity<CityDTO> update(@PathVariable Long id, @Valid @RequestBody CityDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
