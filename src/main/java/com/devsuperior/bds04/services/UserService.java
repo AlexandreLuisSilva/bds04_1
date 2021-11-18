@@ -21,13 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.bds04.dto.RoleDTO;
 import com.devsuperior.bds04.dto.UserDTO;
 import com.devsuperior.bds04.dto.UserUpdateDTO;
+import com.devsuperior.bds04.dto.UserInsertDTO;
 import com.devsuperior.bds04.entities.Role;
 import com.devsuperior.bds04.entities.User;
 import com.devsuperior.bds04.repositories.RoleRepository;
 import com.devsuperior.bds04.repositories.UserRepository;
 import com.devsuperior.bds04.services.exceptions.DataBaseException;
 import com.devsuperior.bds04.services.exceptions.ResourceNotFoundException;
-import com.devsuperior.bds04.services.validation.UserInsertDTO;
 
 @Service
 public class UserService implements UserDetailsService {
